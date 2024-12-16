@@ -1,16 +1,26 @@
 import sun.swing.MenuItemLayoutHelper.max
-
+fun main (){
+    commission("Мир", 0, 1000.0)
+    println()
+}
 fun commission (card: String, formerTransfers: Int, currentTransfer: Double): Double {
     var commission = 0.0
     val dailyLimit = 150000.00
     val monthlyLimit = 600000.00
 
+    if (formerTransfers > dailyLimit) {
+        println("Превышен дневной лимит")
+    }
+    if (formerTransfers > monthlyLimit){
+        println("Превышен месячный лимит")
+    }
+
     when (card) {
         "Mastercard" -> {
-            if (formerTransfers < 75000) {
-                commission = 0.0
-            } else {
+            if (formerTransfers + currentTransfer > 75000) {
                 commission = currentTransfer * 0.006 + 20
+            } else {
+                commission = 0.0
             }
         }
 
@@ -26,12 +36,7 @@ fun commission (card: String, formerTransfers: Int, currentTransfer: Double): Do
         }
 
     }
-    if (formerTransfers > dailyLimit) {
-        println("Превышен дневной лимит")
-    }
-    if (formerTransfers > monthlyLimit){
-        println("Превышен месячный лимит")
-    }
+
 
     return commission
 
